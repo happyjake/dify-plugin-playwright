@@ -9,6 +9,6 @@ from tools.playwright import run_playwright
 class PlaywrightProvider(ToolProvider):
     def _validate_credentials(self, credentials: dict[str, Any]) -> None:
         try:
-            run_playwright(credentials.get("playwright_uri"), "")
+            run_playwright(credentials.get("playwright_uri"), "", uri_type="ws")
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))

@@ -9,9 +9,9 @@ from playwright.sync_api import sync_playwright
 def run_playwright(uri: str, commands: str, uri_type: Literal["ws", "cdp"]) -> str | bytes:
     with sync_playwright() as p:
         if uri_type == "ws":
-            browser = p.chromium.connect(ws_endpoint=uri, timeout=3000)
+            browser = p.chromium.connect(ws_endpoint=uri, timeout=30000)
         else:
-            browser = p.chromium.connect_over_cdp(endpoint_url=uri, timeout=3000)
+            browser = p.chromium.connect_over_cdp(endpoint_url=uri, timeout=30000)
         local_vars = {"browser": browser}
         exec(commands, {}, local_vars)
         result = local_vars.get("result")
